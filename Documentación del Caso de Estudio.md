@@ -136,4 +136,4 @@ Debajo de Cloud Composer hay un clúster de Kubernetes. Cloud Composer utiliza G
 
 Por ello y sin embargo el uso de Cloud Composer termina siendo costoso y el paradigma de creación de 5 dataflows seguidos provoca lentitud en el flujo de trabajo ya que Composer tiene que iniciar primeramente la infraestructura de cada Dataflow antes de lanzar un job sobre él. El proceso demora alrededor de 2 horas lo que no cumple con el criterio de eficiencia/rendimiento.
 
-Para este Caso de Estudio particular la aproximación utilizada ETL con Cloud Composer orquestando todos los procesos no es costo/eficiente por lo que se procede a analizar una nueva variante ELT. **(Ver Aproximación 2 ELT)**.
+Para este Caso de Estudio particular la aproximación utilizada ETL con Cloud Composer orquestando todos los procesos no es costo/eficiente por lo que se procede a analizar una nueva alternativa arquitectónica de tipo ELT. **(Ver Aproximación 2 ELT)**.
