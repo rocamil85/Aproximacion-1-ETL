@@ -1,12 +1,12 @@
 # Aproximación-1-ETL
 ## Problemática
-Cada día a las 2:00 am hay que hacer un proceso bash, ¿en qué consiste ese bash?,a través de una petición POST a un endpoint de un sistema tercerizado llamado "CEO" devuelve un objeto json muy grande anidado con muchos objetos dentro (cada objeto es una orden de compra realizada por un cliente), una orden tiene alrededor de 100 campos o tributos, o sea es bastante complejo pero bien estructurado (incluye por ejemplo nombre del comprador, el producto, la dirección de envío, etc.). 
+Cada día a las 2:00 am hay que hacer un proceso bash, ¿en qué consiste ese bash?, a través de una petición POST a un endpoint de un "sistema tercerizado" se devuelve un objeto json muy grande anidado con muchos objetos dentro (cada objeto interno es una orden de compra realizada por un cliente), una orden tiene alrededor de 100 campos o atributos, o sea es bastante complejo pero bien estructurado (incluye por ejemplo nombre del comprador, el producto, la dirección de envío, etc.). 
 
-La petición POST devuelve las ordenes de los últimos 5 meses, si tenemos en cuenta que un día cualquiera hay una aproximado de 6000 órdenes, y en un día como navidad pueden haber por alta demanda 20000 órdenes, notarás que ya se trata de un ambiente de Bigdata. Cabe recalcar aquí que esta petición POST no devuelve las órdenes de los últimos 5 meses en una sola petición, en realidad la API devuelve sólo 100 órdenes por un tema de rendimiento, por lo que hay que hacer una especie de paginación de 100 en 100 hasta llegar a todas las órdenes de 5 meses atrás. La API tiene un campo "total de orden" y se sabe hasta cuando habría que iterar.
+La petición POST devuelve las órdenes de los últimos 5 meses, si tenemos en cuenta que un día cualquiera hay una aproximado de 6000 órdenes, y en un día como navidad pueden haber por alta demanda 20000 órdenes, notarás que ya se trata de un ambiente de Bigdata. Cabe recalcar aquí que esta petición POST no devuelve las órdenes de los últimos 5 meses en una sola petición, en realidad la API devuelve sólo 100 órdenes por un tema de rendimiento, por lo que hay que hacer una especie de paginación de 100 en 100 hasta llegar a todas las órdenes de 5 meses atrás. La API tiene un campo "total de orden" y se sabe hasta cuando habría que iterar.
 
 Sigamos con el escenario general del ejercicio. Se hace la petición POST y cada una de las órdenes deben insertarse en Bigquery. O sea, hay que diseñar una tabla de Bigquery que tenga como columnas los atributos internos de una orden. Una orden tiene un campo que es un identificador, como este proceso se va a hacer todos los días la idea es que las órdenes que sean nuevas o sea que aún no existan en Bigquery hay que insertarlas, pero si ya existen solo hay que actualizarlas. 
 
-Cuando dicha orden ya está insertada o actualizada (ya sea una u otra, siempre debe ser una u otra) entonces hay que notificarla al "CEO" a través de otra petición POST "diciéndole" que ya tengo esa orden en Bigquery. La idea de hacer esta notificación exitosa es asegurarme de que no hubo ningún problema durante un proceso intermedio de Transformación y que efectivamente llegó la orden a Bigquery y está tengo lista para hacer Análisis y Machine Learning en el futuro. 
+Cuando dicha orden ya está insertada o actualizada (ya sea una u otra, siempre debe ser una u otra) entonces hay que notificarla al "sistema tercerizado" a través de otra petición POST "diciéndole" que ya tengo esa orden en Bigquery. La idea de hacer esta notificación exitosa es asegurarse de que no hubo ningún problema durante un proceso intermedio de Transformación y que efectivamente llegó la orden a Bigquery y está tengo lista para hacer Análisis y Machine Learning en el futuro. 
 
 ## ¿Cual podría ser una solución costo efectiva en GCP?
 
@@ -14,7 +14,7 @@ Cuando dicha orden ya está insertada o actualizada (ya sea una u otra, siempre 
 
 #### 1. Extracción de Datos y Almacenamiento Intermedio
 ##### Cloud Scheduler & Cloud Functions: 
-Utilizar Cloud Scheduler para activar una Cloud Functions diariamente a las 2:00 am. Esta función ejecutará el script de extracción de datos. La Cloud Functions realizará las peticiones POST paginadas al sistema "CEO". Para manejar el volumen de datos, puedes considerar almacenar los resultados intermedios en un formato eficiente como JSON o Avro.
+Utilizar Cloud Scheduler para activar una Cloud Functions diariamente a las 2:00 am. Esta función ejecutará el script de extracción de datos. La Cloud Functions realizará las peticiones POST paginadas al sistema "sistema tercerizado". Para manejar el volumen de datos, puedes considerar almacenar los resultados intermedios en un formato eficiente como JSON o Avro.
 ##### Google Cloud Storage (GCS):
 Almacenar los datos extraídos en GCS. Elige un formato de archivo adecuado (CSV, JSON, Avro, o Parquet) según tus necesidades de procesamiento y análisis posterior.
 
@@ -124,7 +124,7 @@ Para una tarea que se ejecuta diariamente y puede durar hasta 15 minutos, Cloud 
 
 
 ### Propuesta de solución
-1.	Una Cloud Run contiene una app Python que se encarga de hacer las peticiones al "CEO" de forma paginada y colocar cada objeto json extraído en GCS, (en un archivo .json correspondiente al día solicitado) que tiene todos los objetos json extraídos de las peticiones. (Se genera un archivo por día). ###### (Ver App extract-ceo-app-repository)
+1.	Una Cloud Run contiene una app Python que se encarga de hacer las peticiones al "sistema tercerizado" de forma paginada y colocar cada objeto json extraído en GCS, (en un archivo .json correspondiente al día solicitado) que tiene todos los objetos json extraídos de las peticiones. (Se genera un archivo por día). ###### (Ver App extract-ceo-app-repository)
    
   a.	Se utilizan técnicas de CI/CD para este despliegue. En Editor de Código de la Cloud Shell. Una vez probado el código localmente usando un entorno virtual de Python para aislar las dependencias. Se hace un Push a una rama por ejemplo Staging (repositorio creado previamente en Cloud Sources Repositories).
 
