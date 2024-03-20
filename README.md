@@ -32,7 +32,7 @@ Aunque las tablas ya tienen la mayor transformacion realizada previamente por Da
   
 #### 4. Notificación de Éxito
 ##### Cloud Functions para Notificación: 
-Una vez que los datos estén cargados en BigQuery, usar otra Cloud Functiosn para notificar al sistema "CEO" a través de una petición POST por cada orden procesada.
+Una vez que los datos estén cargados en BigQuery, se usará otra Cloud Functions para notificar al "sistema tercerizado" a través de una petición POST por cada orden procesada.
 
 #### 5. Orquestación de Procesos
 ##### Cloud Composer (Apache Airflow):
