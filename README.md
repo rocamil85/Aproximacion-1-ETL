@@ -26,13 +26,15 @@ Utilizar Apache Beam para crear un pipeline de procesamiento de datos que se eje
 - Verificar si cada orden ya existe en BigQuery y decidir si insertar o actualizar.
 - Cargar los datos en la tabla original de BigQuery.
 - Realizar las transformaciones necesarias y cargar los datos en una segunda tabla transformada en BigQuery.
-- Ejecutar varios procedimientos almacenados en BigQuery que ajustan el contenido de las tablas iniciales.
+
+#### 3. Ejecución de Procedimientos Almacenados en Bigquery
+Aunque las tablas ya tienen la mayor transformacion realizada previamente por Dataflow todavía es necesario ejecutar varios procedimientos almacenados en BigQuery que ajustan el contenido de las tablas iniciales para crear las tablas finales.
   
-#### 3. Notificación de Éxito
+#### 4. Notificación de Éxito
 ##### Cloud Functions para Notificación: 
 Una vez que los datos estén cargados en BigQuery, usar otra Cloud Functiosn para notificar al sistema "CEO" a través de una petición POST por cada orden procesada.
 
-#### 4. Orquestación de Procesos
+#### 5. Orquestación de Procesos
 ##### Cloud Composer (Apache Airflow):
 Utilizar Cloud Composer para orquestar todo el flujo de trabajo. Esto incluye:
 - La activación de la Cloud Functions de extracción de datos e inserción intermedia en GCS.
