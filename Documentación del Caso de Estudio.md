@@ -56,12 +56,6 @@ Al utilizar servicios de GCP, te beneficias de la alta disponibilidad y la facil
 #### Automatización y Orquestación: 
 Cloud Composer facilita la gestión de dependencias y la secuencia de tareas, asegurando que el flujo de trabajo se ejecute sin problemas.
 
-```diff
-+ ejemplo bloque verde
-hghjg
-dfsdfsfd
-```
-
 #### Cloud Run VS Cloud Functions o App Engine
 Para entender por qué Cloud Run puede ser una mejor opción que Cloud Functions o App Engine en este caso, es importante considerar las  características específicas de la tarea y las capacidades de cada plataforma. Vamos a compararlas en términos de flexibilidad, tiempo de ejecución, escalabilidad y costos.
 
