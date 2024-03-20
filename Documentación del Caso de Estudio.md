@@ -1,9 +1,6 @@
 # Documentación del caso de Estudio (Aproximación 1 ETL)
 ## Problemática
-```diff
-+ Problemática
-- asdasdsad
-```
+
 Cada día a las 2:00 am hay que hacer un proceso bash, ¿en qué consiste ese bash?, a través de una petición POST a un endpoint de un "sistema tercerizado" se devuelve un objeto json muy grande anidado con muchos objetos dentro (cada objeto interno es una orden de compra realizada por un cliente), una orden tiene alrededor de 100 campos o atributos, o sea es bastante complejo pero bien estructurado (incluye por ejemplo nombre del comprador, el producto, la dirección de envío, etc.). 
 
 La petición POST devuelve las órdenes de los últimos 5 meses, si tenemos en cuenta que un día cualquiera hay una aproximado de 6000 órdenes, y en un día como navidad pueden haber por alta demanda 20000 órdenes, notarás que ya se trata de un ambiente de Bigdata. Cabe recalcar aquí que esta petición POST no devuelve las órdenes de los últimos 5 meses en una sola petición, en realidad la API devuelve sólo 100 órdenes por un tema de rendimiento, por lo que hay que hacer una especie de paginación de 100 en 100 hasta llegar a todas las órdenes de 5 meses atrás. La API tiene un campo "total de orden" y se sabe hasta cuando habría que iterar.
@@ -59,7 +56,8 @@ Al utilizar servicios de GCP, te beneficias de la alta disponibilidad y la facil
 #### Automatización y Orquestación: 
 Cloud Composer facilita la gestión de dependencias y la secuencia de tareas, asegurando que el flujo de trabajo se ejecute sin problemas.
 
-
+```diff
++
 #### Cloud Run VS Cloud Functions o App Engine
 Para entender por qué Cloud Run puede ser una mejor opción que Cloud Functions o App Engine en este caso, es importante considerar las características específicas de la tarea y las capacidades de cada plataforma. Vamos a compararlas en términos de flexibilidad, tiempo de ejecución, escalabilidad y costos.
 
@@ -123,6 +121,8 @@ Similar a Cloud Run en términos de costos, pero con las limitaciones de tiempo 
 
 ###### App Engine: 
 Puede incurrir en costos más altos, especialmente si necesita estar ejecutándose continuamente o manejar cargas de trabajo impredecibles.
+
+```
 
 #### Conclusión Parcial:
 Para una tarea que se ejecuta diariamente y puede durar hasta 15 minutos, Cloud Run es probablemente la mejor opción debido a su flexibilidad, capacidad para manejar tiempos de ejecución más largos y un modelo de precios que sólo te cobra por el tiempo de ejecución real. Además, te brinda la flexibilidad de trabajar con contenedores, lo que significa que puedes configurar tu entorno exactamente como lo necesitas.
