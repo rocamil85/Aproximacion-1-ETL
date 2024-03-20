@@ -57,9 +57,11 @@ Al utilizar servicios de GCP, te beneficias de la alta disponibilidad y la facil
 Cloud Composer facilita la gestión de dependencias y la secuencia de tareas, asegurando que el flujo de trabajo se ejecute sin problemas.
 
 ```diff
-+
-#### Cloud Run VS Cloud Functions o App Engine
-Para entender por qué Cloud Run puede ser una mejor opción que Cloud Functions o App Engine en este caso, es importante considerar las características específicas de la tarea y las capacidades de cada plataforma. Vamos a compararlas en términos de flexibilidad, tiempo de ejecución, escalabilidad y costos.
++ ejemplo bloque verde
+```
+
+> #### Cloud Run VS Cloud Functions o App Engine
+> Para entender por qué Cloud Run puede ser una mejor opción que Cloud Functions o App Engine en este caso, es importante considerar las > características específicas de la tarea y las capacidades de cada plataforma. Vamos a compararlas en términos de flexibilidad, tiempo > de ejecución, escalabilidad y costos.
 
 ##### Cloud Run 
 ##### Ventajas:
@@ -122,7 +124,6 @@ Similar a Cloud Run en términos de costos, pero con las limitaciones de tiempo 
 ###### App Engine: 
 Puede incurrir en costos más altos, especialmente si necesita estar ejecutándose continuamente o manejar cargas de trabajo impredecibles.
 
-```
 
 #### Conclusión Parcial:
 Para una tarea que se ejecuta diariamente y puede durar hasta 15 minutos, Cloud Run es probablemente la mejor opción debido a su flexibilidad, capacidad para manejar tiempos de ejecución más largos y un modelo de precios que sólo te cobra por el tiempo de ejecución real. Además, te brinda la flexibilidad de trabajar con contenedores, lo que significa que puedes configurar tu entorno exactamente como lo necesitas.
