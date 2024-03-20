@@ -42,17 +42,17 @@ Utilizar Cloud Composer para orquestar todo el flujo de trabajo. Esto incluye:
 - La ejecución de procedimientos almacenados en BigQuery.
 - La activación de la Cloud Functions de notificación.
 
-#### Razones para Esta Arquitectura
-### Escalabilidad y Flexibilidad: 
+### Razones para Esta Arquitectura
+#### Escalabilidad y Flexibilidad: 
 Esta arquitectura es escalable para manejar el alto volumen de datos y las variaciones en el número de órdenes (como en temporadas altas).
 
-### Costo-Eficiencia: 
+#### Costo-Eficiencia: 
 El uso de servicios gestionados como Cloud Functions, Dataflow y BigQuery optimiza los costos, ya que pagas solo por los recursos que utilizas.
 
-### Fiabilidad y Mantenibilidad: 
+#### Fiabilidad y Mantenibilidad: 
 Al utilizar servicios de GCP, te beneficias de la alta disponibilidad y la facilidad de mantenimiento.
 
-### Automatización y Orquestación: 
+#### Automatización y Orquestación: 
 Cloud Composer facilita la gestión de dependencias y la secuencia de tareas, asegurando que el flujo de trabajo se ejecute sin problemas.
 
 
