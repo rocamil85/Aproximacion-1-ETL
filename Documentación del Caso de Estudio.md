@@ -1,7 +1,7 @@
 # Documentación del caso de Estudio (Aproximación 1 ETL)
 ## Problemática
 ```diff
-+ Este texto aparecerá con fondo amarillo, pero como parte de un bloque de código.
+## Este texto aparecerá con fondo amarillo, pero como parte de un bloque de código.
 ```
 Cada día a las 2:00 am hay que hacer un proceso bash, ¿en qué consiste ese bash?, a través de una petición POST a un endpoint de un "sistema tercerizado" se devuelve un objeto json muy grande anidado con muchos objetos dentro (cada objeto interno es una orden de compra realizada por un cliente), una orden tiene alrededor de 100 campos o atributos, o sea es bastante complejo pero bien estructurado (incluye por ejemplo nombre del comprador, el producto, la dirección de envío, etc.). 
 
