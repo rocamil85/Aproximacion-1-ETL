@@ -39,7 +39,7 @@ Aunque las tablas ya tienen la mayor transformacion realizada previamente por Da
 - La ejecución de procedimientos almacenados en BigQuery.
 - La activación de la Cloud Functions de notificación.
 
-### -------------------------------- Razones para Esta Arquitectura -----------------------------------------------------
+### ---------------------- Razones para Esta Arquitectura ----------------------------------
 **Escalabilidad y Flexibilidad:** Esta arquitectura es escalable para manejar el alto volumen de datos y las variaciones en el número de órdenes (como en temporadas altas).
 
 **Costo-Eficiencia:** El uso de servicios gestionados como Cloud Functions, Dataflow y BigQuery optimiza los costos, ya que pagas sólo por los recursos que utilizas.
@@ -131,9 +131,9 @@ Para una tarea que se ejecuta diariamente y puede durar hasta 15 minutos, Cloud 
 
 1. Orquestación a través de Composer, se crea una DAG (DAG_cloudrun_dataflow_sp subido al bucket del DAG correspondiente) que básicamente inicia una serie de tareas a las 2:00 am comenzando por la llamada (autenticada) a la Cloud Run (usando PythonOperator). La misma desencadena la lectura de ordenes y guarda en GCS los archivos json de cada día de los últimos 5 meses. Luego desencadena los 5 dataflows (usando BeamRunPythonPipelineOperator) en orden y por último todos los procedimientos almacenados (BigQueryExecuteQueryOperator) en el orden correcto.
 
-## Conclusión:
+## Conclusión
 Debajo de Cloud Composer hay un clúster de Kubernetes. Cloud Composer utiliza Google Kubernetes Engine (GKE) para orquestar y gestionar los contenedores que ejecutan Apache Airflow y sus componentes relacionados. Este enfoque aprovecha la escalabilidad, la gestión de la infraestructura y las capacidades de auto-curación de Kubernetes, proporcionando una plataforma robusta y escalable para la orquestación de flujos de trabajo.
 
 Por ello y sin embargo el uso de Cloud Composer termina siendo costoso y el paradigma de creación de 5 dataflows seguidos provoca lentitud en el flujo de trabajo ya que Composer tiene que iniciar primeramente la infraestructura de cada Dataflow antes de lanzar un job sobre él. El proceso demora alrededor de 2 horas lo que no cumple con el criterio de eficiencia/rendimiento.
 
-Para este Caso de Estudio particular la aproximación utilizada ETL con Cloud Composer orquestando todos los procesos no es costo/eficiente por lo que se procede a analizar una nueva variante ELT. (Ver Aproximación 2 ELT).
+Para este Caso de Estudio particular la aproximación utilizada ETL con Cloud Composer orquestando todos los procesos no es costo/eficiente por lo que se procede a analizar una nueva variante ELT. **(Ver Aproximación 2 ELT)**.
