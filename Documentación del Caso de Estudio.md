@@ -60,7 +60,7 @@ Cloud Composer facilita la gestión de dependencias y la secuencia de tareas, as
 + ejemplo bloque verde
 ```
 
-> #### Cloud Run VS Cloud Functions o App Engine
+ #### Cloud Run VS Cloud Functions o App Engine
 > Para entender por qué Cloud Run puede ser una mejor opción que Cloud Functions o App Engine en este caso, es importante considerar las > características específicas de la tarea y las capacidades de cada plataforma. Vamos a compararlas en términos de flexibilidad, tiempo > de ejecución, escalabilidad y costos.
 
 ##### Cloud Run 
