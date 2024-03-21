@@ -19,7 +19,7 @@ from apache_beam.io import fileio
 PROJECT_ID    = 'PROJECT_ID'
 BUCKET_NAME   = 'BUCKET_NAME'
 DATASET       = 'nombre_dataset'
-TEMP_LOCATION = 'gs://bucket_extract_alas/temp'
+TEMP_LOCATION = 'gs://nombre_bucket/temp'
 RUNNER_TYPE   = 'DataflowRunner'
 
 
