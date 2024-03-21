@@ -14,7 +14,6 @@ import json
 import logging
 from apache_beam.io import fileio
 
-
 # Configuraciones
 PROJECT_ID    = 'PROJECT_ID'
 BUCKET_NAME   = 'BUCKET_NAME'
