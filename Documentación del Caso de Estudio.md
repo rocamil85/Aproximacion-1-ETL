@@ -109,6 +109,7 @@ Para una tarea que se ejecuta diariamente y puede durar hasta 15 minutos, Cloud 
 
 
 ## Propuesta de solución
+![Cloud Composer](Composer/composer.png)
 1. Una Cloud Run contiene una app Python que se encarga de hacer las peticiones al "sistema tercerizado" de forma paginada y colocar cada objeto json extraído en GCS, (en un archivo .json correspondiente al día solicitado) que tiene todos los objetos json extraídos de las peticiones. (Se genera un archivo por día). (_**Ver App extract-ceo-app-repository**_)
    
 1. Se utilizan técnicas de CI/CD para este despliegue. En Editor de Código de la Cloud Shell. Una vez probado el código localmente usando un entorno virtual de Python para aislar las dependencias. Se hace un Push a una rama por ejemplo Staging (repositorio creado previamente en Cloud Sources Repositories).
@@ -129,7 +130,8 @@ Para una tarea que se ejecuta diariamente y puede durar hasta 15 minutos, Cloud 
 
 1. En este punto queda desarrollar todo el esquema de las tablas y procedimientos almacenados dentro de Bigquery, (los esquemas de las 5 tablas para probar los 5 dataflows deberían existir). Se procede a hacer una serie de procedimientos almacenados que son transformaciones a partir de las 5 tablas iniciales provenientes de los 5 dataflows. Transformaciones que requieren el uso de Update y Delete continuadamente hasta llegar a las tablas delivery_order_master (histórica) y delivery_order_work (Final).
 
-1. Orquestación a través de Composer, se crea una DAG (DAG_cloudrun_dataflow_sp subido al bucket del DAG correspondiente) que básicamente inicia una serie de tareas a las 2:00 am comenzando por la llamada (autenticada) a la Cloud Run (usando PythonOperator). La misma desencadena la lectura de ordenes y guarda en GCS los archivos json de cada día de los últimos 5 meses. Luego desencadena los 5 dataflows (usando BeamRunPythonPipelineOperator) en orden y por último todos los procedimientos almacenados (BigQueryExecuteQueryOperator) en el orden correcto.
+1. Orquestación a través de Composer, se crea una DAG (_**Ver Composer/DAG_cloudrun_dataflow_sp**_) y se sube al bucket del DAG correspondiente generado por Composer durante la configuración inicial. Este DAG básicamente inicia una serie de tareas a las 2:00 am comenzando por la llamada (autenticada) a la Cloud Run (usando PythonOperator). La misma desencadena la lectura de órdenes y guarda en GCS los archivos json de cada día de los últimos 5 meses. Luego desencadena 5 dataflows (que generan tablas temporales en Bigquery) (usando BeamRunPythonPipelineOperator) en orden y por último todos los procedimientos almacenados (BigQueryExecuteQueryOperator) en el orden correcto. Debajo se muestra el proceso de construcción/ejecución de Cloud Composer (Versión admnistrada de Apache Airflow).
+![Cloud Composer ejecución](Composer/airflow.png) 
 
 ## Conclusión
 Debajo de Cloud Composer hay un clúster de Kubernetes. Cloud Composer utiliza Google Kubernetes Engine (GKE) para orquestar y gestionar los contenedores que ejecutan Apache Airflow y sus componentes relacionados. Este enfoque aprovecha la escalabilidad, la gestión de la infraestructura y las capacidades de auto-curación de Kubernetes, proporcionando una plataforma robusta y escalable para la orquestación de flujos de trabajo.
