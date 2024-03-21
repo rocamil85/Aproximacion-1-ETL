@@ -1,4 +1,4 @@
-#------------------------------   Este es un código demostrativo y no está completo por razones de confidencialidad -----------------------------------
+#------------------------------   Este es un código demostrativo a partir de la implementación real  -----------------------------------
 
 import os
 from flask import Flask
@@ -57,7 +57,7 @@ def procesar_orden(orden):
     destination_polygon_lab = None
     if destination_structure_id in [13123, 13120, 13101]:
         params = {"lat": destination_geo_location_lat, "lon": destination_geo_location_lon, "structure_id": destination_structure_id}
-        response = requests.post('https://pickup.alasxpress.com/api/_polygon-finder-lab', json=params)
+        response = requests.post('https://url/externa', json=params)
         if response.status_code == 200:
             destination_polygon_lab = json.loads(response.content)
             destination_polygon_lab = destination_polygon_lab if 'contained' in destination_polygon_lab and destination_polygon_lab['contained'] else None
