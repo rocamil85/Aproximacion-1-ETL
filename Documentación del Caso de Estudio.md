@@ -55,7 +55,7 @@ Para entender por qué Cloud Run puede ser una mejor opción que Cloud Functions
 
 #### Cloud Run 
 **Ventajas:**
-* **Flexibilidad en Tiempos de Ejecución:** Cloud Run permite tiempos de ejecución más prolongados en comparación con Cloud Functions. Puede manejar tareas que duren hasta 15 minutos o más, dependiendo de la configuración, lo cual es ideal para tu caso de uso.
+* **Flexibilidad en Tiempos de Ejecución:** Cloud Run permite tiempos de ejecución más prolongados en comparación con Cloud Functions. Puede manejar tareas que duren hasta 15 minutos o más, dependiendo de la configuración, lo cual es ideal para este caso de uso.
 * **Contenerización:** Cloud Run utiliza contenedores, lo que te ofrece flexibilidad para incluir cualquier biblioteca o dependencia necesaria sin preocuparte por el entorno de ejecución.
 
 * **Escalabilidad Automática:** Escala automáticamente y puede escalar a cero cuando no hay solicitudes, lo que significa que no pagas por el tiempo de inactividad.
