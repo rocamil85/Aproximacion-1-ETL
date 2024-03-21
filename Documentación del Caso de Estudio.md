@@ -29,7 +29,7 @@ Hay que tener en cuenta que cada orden recibida (y se obtienen muchas órdenes d
 * Realizar las transformaciones necesarias y cargar los datos en una segunda tabla transformada en BigQuery.
 
 #### 3. Ejecución de Procedimientos Almacenados en Bigquery
-Aunque las tablas ya tienen la mayor transformacion realizada previamente por Dataflow todavía es necesario ejecutar varios procedimientos almacenados en BigQuery que ajustan el contenido de las tablas iniciales para crear las tablas finales.
+Aunque las tablas ya tienen la mayor transformación realizada previamente por Dataflow todavía es necesario ejecutar varios procedimientos almacenados en BigQuery que ajustan el contenido de las tablas iniciales para crear las tablas finales.
   
 #### 4. Notificación de Éxito
 **Cloud Functions para Notificación:** Una vez que los datos estén cargados en BigQuery, se usará otra Cloud Functions para notificar al "sistema tercerizado" a través de una petición POST por cada orden procesada.
