@@ -1,0 +1,6 @@
+Flask
+requests
+python-dateutil
+google-cloud-storage
+pytz
+gunicorn

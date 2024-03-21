@@ -1,0 +1,29 @@
+steps:
+  # Paso 1: Instalar dependencias
+  - name: 'python:3.9-slim'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        pip install -r alas_dataflow_1/requirements.txt
+
+  # Paso 2: Ejecutar pruebas unitarias
+  - name: 'python:3.9-slim'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        python -m unittest discover -s alas_dataflow_1/tests
+
+  
+# Paso 3: Copiar el código a GCS si las pruebas son exitosas
+  - name: 'gcr.io/cloud-builders/gsutil'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        gsutil cp alas_dataflow_1/src/1_run_main_table_pipeline.py gs://direccion-bucket-del-dags/dags/ &&
+        gsutil cp alas_dataflow_1/src/2_run_events_info_temp_pipeline.py gs://direccion-bucket-del-dags/dags/ &&
+        gsutil cp alas_dataflow_1/src/3_run_schedule_events_info_temp_pipeline.py gs://direccion-bucket-del-dags/dags/ &&
+        gsutil cp alas_dataflow_1/src/4_run_reschedule_events_info_temp_pipeline.py gs://direccion-bucket-del-dags/dags/ &&
+        gsutil cp alas_dataflow_1/src/5_run_packages_temp_pipeline.py gs://direccion-bucket-del-dags/dags/
