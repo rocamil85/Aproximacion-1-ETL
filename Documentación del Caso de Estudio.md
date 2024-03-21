@@ -111,7 +111,7 @@ Para una tarea que se ejecuta diariamente y puede durar hasta 15 minutos, Cloud 
 
 
 ## Propuesta de solución
-![Cloud Composer](Composer/composer.png)
+![Cloud Composer](Composer/composer2.png)
 1. Una Cloud Run contiene una app Python que se encarga de hacer las peticiones al "sistema tercerizado" de forma paginada y colocar cada objeto json extraído en GCS, (en un archivo .json correspondiente al día solicitado) que tiene todos los objetos json extraídos de las peticiones. (Se genera un archivo por día). (_**Ver App extract-ceo-app-repository**_)
    
 1. Se utilizan técnicas de CI/CD para este despliegue. En Editor de Código de la Cloud Shell. Una vez probado el código localmente usando un entorno virtual de Python para aislar las dependencias. Se hace un Push a una rama por ejemplo Staging (repositorio creado previamente en Cloud Sources Repositories).
